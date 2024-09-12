@@ -1,8 +1,10 @@
 const { uploadSingleFile } = require("../services/fileService");
-// phải viết theo chuẩn 1 object {key:value}
+const { createCustomerService } = require("../services/customerService");
+
+//  viết theo chuẩn 1 object {key:value}
 module.exports = {
   postCreateCustomer: async (req, res) => {
-    let { name, address, phone, email, image, description } = req.body; // destructuring object js
+    let { name, address, phone, email, description } = req.body; // destructuring object js
 
     let imageUrl = "";
 
@@ -10,9 +12,24 @@ module.exports = {
       // do nothing
     } else {
       let result = await uploadSingleFile(req.files.image);
-      console.log("check result: ", result);
+      imageUrl = result.path;
+      console.log("check path result: ", result.path);
     }
 
-    return res.send("Create new customer");
+    let customerData = {
+      name,
+      address,
+      phone,
+      email,
+      image: imageUrl,
+      description,
+    };
+
+    let customer = await createCustomerService(customerData);
+    // để biến thành 1 API
+    return res.status(200).json({
+      errorCode: 0,
+      data: customer,
+    });
   },
 };

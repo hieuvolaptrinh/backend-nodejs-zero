@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <style>
+    .title {
+      text-transform: capitalize;
+      font-size: 24px;
+    }
+    .table-container {
+      margin: 0 auto;
+      width: 1200px;
+      max-width: calc(100% - 480px);
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+      background-color: rgb(126, 125, 124);
+    }
+  </style>
+  <body>
+    <div class="topnav">
+      <a class="active" href="/">Home</a>
+      <a href="/create">create user</a>
+    </div>
+
+    <div class="table-container">
+      <!-- <%= JSON.stringify(listUsers) %> -->
+      <div class="title">list user</div>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>Action</th>
+        </tr>
+
+        <!-- <% for (let i = 0; i < listUsers.length; i++) { %>
+        <tr>
+          <td><%= listUsers[i].id %></td>
+          <td><%= listUsers[i].email %></td>
+          <td><%= listUsers[i].name %></td>
+          <td><%= listUsers[i].city %></td>
+          <td>
+            <button>Edit</button>
+            <button>Delete</button>
+          </td>
+        </tr>
+        <% } %> -->
+        <% listUsers.forEach((user, index) => { %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.email %></td>
+          <td><%= user.name %></td>
+          <td><%= user.city %></td>
+          <td style="display: flex">
+            <!-- viết bằng thẻ form để cho nó khó :> -->
+            <button><a href="/update/<%= user.id %>">Edit</a></button>
+            <form action="/delete-user/<%= user.id%>" method="post">
+              <button>Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% }); %>
+      </table>
+    </div>
+  </body>
+</html>

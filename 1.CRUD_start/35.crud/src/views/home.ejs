@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <a class="active" href="#home">Home</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">About</a>
+    </div>
+    <div class="form-add-new">
+      <form class="form" action="/create-user" method="post">
+        <fieldset>
+          <legend>Add new users</legend>
+          <div class="input-group">
+            <label for="lname">Name:</label>
+            <input type="text" class="form__input" name="myname" /><br /><br />
+          </div>
+          <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" /><br /><br />
+          </div>
+          <div class="input-group">
+            <label for="lcity">City:</label>
+            <input type="text" name="city" /><br /><br />
+          </div>
+          <div class="form__button">
+            <button class="form__button--save">save</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>

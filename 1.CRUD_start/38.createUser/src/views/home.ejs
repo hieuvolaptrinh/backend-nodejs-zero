@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <style>
+    .title {
+      text-transform: capitalize;
+      font-size: 24px;
+    }
+    .table-container {
+      margin: 0 auto;
+      width: 1200px;
+      max-width: calc(100% - 480px);
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+      background-color: rgb(126, 125, 124);
+    }
+  </style>
+  <body>
+    <div class="topnav">
+      <a class="active" href="/">Home</a>
+      <a href="/create">create user</a>
+    </div>
+
+    <div class="table-container">
+      <!-- <%= JSON.stringify(listUsers) %> -->
+      <div class="title">list user</div>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>Action</th>
+        </tr>
+
+        <!-- <% for (let i = 0; i < listUsers.length; i++) { %>
+        <tr>
+          <td><%= listUsers[i].id %></td>
+          <td><%= listUsers[i].email %></td>
+          <td><%= listUsers[i].name %></td>
+          <td><%= listUsers[i].city %></td>
+          <td>
+            <button>Edit</button>
+            <button>Delete</button>
+          </td>
+        </tr>
+        <% } %> -->
+        <% listUsers.forEach((user, index) => { %>
+        <tr>
+          <td><%= user.id %> - <%= index%></td>
+          <td><%= user.email %>- <%= index%></td>
+          <td><%= user.name %>- <%= index%></td>
+          <td><%= user.city %>- <%= index%></td>
+          <td>
+            <button>Edit</button>
+            <button>Delete</button>
+          </td>
+        </tr>
+        <% }); %>
+      </table>
+    </div>
+  </body>
+</html>

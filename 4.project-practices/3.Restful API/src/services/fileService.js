@@ -1,39 +1,43 @@
 const path = require("path");
-const uploandSingle = async (fileObject) => {
-  // const uploadPath = path.join(
-  //   __dirname,
-  //   "..",
-  //   "public",
-  //   "images",
-  //   fileObject.name
-  // );
-  const uploadPath = path.resolve(__dirname, "../public/images/upload");
+const uploadSingleFile = async (fileObject) => {
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
 
-  // chế biến lại tên ảnh :>
-  // get image extension
+  // save => public/images/upload
+  //remember to create the upload folder first
+  let uploadPath = path.resolve(__dirname, "../public/images/upload");
+  // console.log(">>> check fileObject: ", path.resolve(__dirname, "../public/images/upload"))
+
+  // abc.png => abc-timestamp.png
+
+  //get image extension
   let extName = path.extname(fileObject.name);
-  // get image name
-  let baseName = path.basename(fileObject.name);
-  // create final path
-  let finalName = `${baseName}-${Date.now()}${{ extName }}`;
+
+  //get image's name (without extension)
+  let baseName = path.basename(fileObject.name, extName);
+
+  //create final path: eg: /upload/your-image.png
+  let finalName = `${baseName}-${Date.now()}${extName}`;
   let finalPath = `${uploadPath}/${finalName}`;
+
+  // console.log("final path: ", finalPath)
+
   try {
     await fileObject.mv(finalPath);
-
     return {
       status: "success",
       path: finalName,
       error: null,
     };
-  } catch (error) {
-    console.log("check err ....: ", error);
+  } catch (err) {
+    console.log(">>> check error: ", err);
     return {
-      status: "fail     ",
+      status: "failed",
       path: null,
-      error: JSON.stringify(error),
+      error: JSON.stringify(err),
     };
   }
 };
+
 const uploandMultipleFiles = async (filesArr) => {
   try {
     let uploadPath = path.resolve(__dirname, "../public/images/upload");
@@ -80,6 +84,6 @@ const uploandMultipleFiles = async (filesArr) => {
   }
 };
 module.exports = {
-  uploandSingle,
+  uploadSingleFile,
   uploandMultipleFiles,
 };

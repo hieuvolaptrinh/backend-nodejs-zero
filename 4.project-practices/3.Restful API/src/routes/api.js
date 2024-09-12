@@ -1,5 +1,6 @@
 const express = require("express"); // import express
 const { getHomePage } = require("../controllers/homeControllers");
+const routerAPI = express.Router();
 const {
   getUsersAPI,
   postCreateUserAPI,
@@ -8,12 +9,8 @@ const {
   postUploandSingleFile,
   postUploandMultipleFiles,
 } = require("../controllers/apiController");
-const routerAPI = express.Router();
-routerAPI.get("/abc", (req, res) => {
-  res.status(200).json({
-    data: "trả ra dữ liệu dạng string vì nó là json",
-  }); // success
-});
+
+const { postCreateCustomer } = require("../controllers/customerController");
 
 routerAPI.get("/users", getUsersAPI); // lấy dât
 routerAPI.post("/users", postCreateUserAPI); // tạo mới
@@ -22,5 +19,5 @@ routerAPI.delete("/users", deleteUserAPI); //xóa
 routerAPI.post("/file", postUploandSingleFile);
 routerAPI.post("/files", postUploandMultipleFiles);
 
-routerAPI.post("/customers", postCreateUserAPI);
+routerAPI.post("/customers", postCreateCustomer);
 module.exports = routerAPI; // export ra ngoài để sử dụng

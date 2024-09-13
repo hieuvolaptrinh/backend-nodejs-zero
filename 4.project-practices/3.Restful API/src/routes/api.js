@@ -10,7 +10,11 @@ const {
   postUploandMultipleFiles,
 } = require("../controllers/apiController");
 
-const { postCreateCustomer } = require("../controllers/customerController");
+const {
+  postCreateCustomer,
+  postCreateArrayCustomer,
+  getAllCustomers
+} = require("../controllers/customerController");
 
 routerAPI.get("/users", getUsersAPI); // lấy dât
 routerAPI.post("/users", postCreateUserAPI); // tạo mới
@@ -20,4 +24,6 @@ routerAPI.post("/file", postUploandSingleFile);
 routerAPI.post("/files", postUploandMultipleFiles);
 
 routerAPI.post("/customers", postCreateCustomer);
+routerAPI.post("/customers-many", postCreateArrayCustomer);
+routerAPI.get("/customers", getAllCustomers);
 module.exports = routerAPI; // export ra ngoài để sử dụng

@@ -3,6 +3,9 @@ const {
   createCustomerService,
   createArrayCustomerService,
   getAllCustomersService,
+  putUpdateCustomersService,
+  deleteACustomerService,
+  deleteArrayCustomerService,
 } = require("../services/customerService");
 
 //  viết theo chuẩn 1 object {key:value}
@@ -63,6 +66,40 @@ module.exports = {
       return res.status(200).json({
         errorCode: -1,
         data: customers,
+      });
+    }
+  },
+  putUpdateCustomers: async (req, res) => {
+    let { id, name, email, address } = req.body;
+    let result = await putUpdateCustomersService(id, name, email, address);
+    return res.status(200).json({
+      errorCode: 0,
+      data: result,
+    });
+  },
+  deleteACustomer: async (req, res) => {
+    let id = req.body.id;
+    let result = await deleteACustomerService(id);
+    res.status(200).json({
+      errorCode: 0,
+      data: result,
+    });
+  },
+  deleteArrayCustomer: async (req, res) => {
+    let ids = req.body.customersId;
+    console.log("check ids: ", ids);
+    
+    let result = await deleteArrayCustomerService(ids);
+    console.log("check result: ", result);
+    if (result) {
+      res.status(200).json({
+        errorCode: 0,
+        data: result,
+      });
+    } else {
+      res.status(200).json({
+        errorCode: -1,
+        data: result,
       });
     }
   },

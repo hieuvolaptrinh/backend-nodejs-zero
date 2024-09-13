@@ -34,8 +34,42 @@ const getAllCustomersService = async () => {
     return null;
   }
 };
+const putUpdateCustomersService = async (id, name, email, address) => {
+  try {
+    let result = Customer.updateOne({ _id: id }, { name, email, address });
+    return result;
+  } catch (error) {
+    console.log("check error: ", error);
+    return null;
+  }
+};
+const deleteACustomerService = async (id) => {
+  try {
+    // let result = await Customer.deleteOne({ _id: id });
+    let result = await Customer.deleteById(id);
+    // let result = await Customer.findByHieuVo(id);
+
+    return result;
+  } catch (error) {
+    console.log("check error: ", error);
+    return null;
+  }
+};
+const deleteArrayCustomerService = async (arrCustomer) => {
+  try {
+    let result = await Customer.delete({ _id: { $in: arrCustomer } }); // hàm delete này của thư viện mongoose-delete : soft delete
+    
+    return result;
+  } catch (error) {
+    console.log("check error: ", error);
+    return null;
+  }
+};
 module.exports = {
   createCustomerService,
   createArrayCustomerService,
   getAllCustomersService,
+  putUpdateCustomersService,
+  deleteACustomerService,
+  deleteArrayCustomerService,
 };

@@ -24,9 +24,15 @@ const createArrayCustomerService = async (arr) => {
     return null;
   }
 };
-const getAllCustomersService = async () => {
+const getAllCustomersService = async (limit, page) => {
   try {
-    let results = await Customer.find({});
+    let results = null;
+    if (limit && page) {
+      let offset = (page - 1) * limit;
+      results = await Customer.find({}).skip(offset).limit(limit).exec(); // exec để đảm bảo rằng nó sẽ trả về một promise
+    } else {
+      results = await Customer.find({});
+    }
 
     return results;
   } catch (error) {
@@ -58,7 +64,7 @@ const deleteACustomerService = async (id) => {
 const deleteArrayCustomerService = async (arrCustomer) => {
   try {
     let result = await Customer.delete({ _id: { $in: arrCustomer } }); // hàm delete này của thư viện mongoose-delete : soft delete
-    
+
     return result;
   } catch (error) {
     console.log("check error: ", error);

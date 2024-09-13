@@ -56,16 +56,23 @@ module.exports = {
     }
   },
   getAllCustomers: async (req, res) => {
-    let customers = await getAllCustomersService();
-    if (customers) {
+    console.log("check req.query: ", req.query);
+    let limit = req.query.limit;
+    let page = req.query.page;
+    let result = null;
+    if (limit && page) {
+      result = await getAllCustomersService(limit, page);
+    } else result = await getAllCustomersService();
+
+    if (result) {
       return res.status(200).json({
         errorCode: 0,
-        data: customers,
+        data: result,
       });
     } else {
       return res.status(200).json({
         errorCode: -1,
-        data: customers,
+        data: result,
       });
     }
   },
@@ -88,7 +95,7 @@ module.exports = {
   deleteArrayCustomer: async (req, res) => {
     let ids = req.body.customersId;
     console.log("check ids: ", ids);
-    
+
     let result = await deleteArrayCustomerService(ids);
     console.log("check result: ", result);
     if (result) {

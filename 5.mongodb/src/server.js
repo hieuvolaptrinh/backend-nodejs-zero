@@ -5,10 +5,11 @@ const configViewEngine = require("./config/viewEngine");
 const wedRoutes = require("./routes/web");
 const apiRoutes = require("./routes/api");
 const app = express(); // Tạo một ứng dụng Express mới
-const port = process.env.PORT || 8888; // khai báo như này là mình hard code cố định, nhưng thực tế thì sẽ dùng biến môi trường
-const hostname = process.env.HOSTNAME;
+const port = process.env.DB_PORT || 8888; // khai báo như này là mình hard code cố định, nhưng thực tế thì sẽ dùng biến môi trường
+const hostname = process.env.DB_HOST;
 
 const connection = require("./config/database");
+const { MongoClient } = require("mongodb");
 
 // inport thư viện express-upload file
 const fileUpload = require("express-fileupload");
@@ -30,7 +31,22 @@ connection();
 
 (async () => {
   try {
-    await connection();
+    // using mongoose
+    // await connection();
+
+    // using mongodb driver
+    // connection URL
+    const url = process.env.DB_HOST;
+    const client = new MongoClient(url);
+    // database Name
+    const dbName = process.env.DB_NAME;
+
+    // Use connect method to connect to the server
+    await client.connect();
+    console.log("connected successfully to server");
+    const db = client.db(dbName);
+    const collection = db.collection("users");
+
     app.listen(port, hostname, () => {
       console.log(`Backend zero app listening at http://localhost:${port} `);
     });

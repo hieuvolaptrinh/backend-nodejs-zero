@@ -24,12 +24,22 @@ const createArrayCustomerService = async (arr) => {
     return null;
   }
 };
-const getAllCustomersService = async (limit, page) => {
+const getAllCustomersService = async (limit, page, name) => {
   try {
     let results = null;
     if (limit && page) {
       let offset = (page - 1) * limit;
-      results = await Customer.find({}).skip(offset).limit(limit).exec(); // exec để đảm bảo rằng nó sẽ trả về một promise
+      if (name) {
+        results = await Customer.find({
+          name: { $regex: ".*" + name + ".*" },
+          // name: { $regex: new RegExp(name, "i") },
+        })
+          .skip(offset)
+          .limit(limit)
+          .exec();
+      } else {
+        results = await Customer.find({}).skip(offset).limit(limit).exec(); // exec để đảm bảo rằng nó sẽ trả về một promise
+      }
     } else {
       results = await Customer.find({});
     }

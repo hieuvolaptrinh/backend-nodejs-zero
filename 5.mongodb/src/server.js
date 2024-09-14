@@ -43,7 +43,16 @@ connection();
     await client.connect();
     console.log("connected successfully to server");
     const db = client.db(dbName);
-    const collection = db.collection("users");
+    const collection = db.collection("customers");
+
+    collection.insertOne({
+      name: "hiếu võ",
+      address: "gia lai",
+    });
+
+    let a = await collection.findOne({ address: "gia lai" });
+    console.log("find oke ", a);
+
     app.listen(port, hostname, () => {
       console.log(`Backend zero app listening at http://localhost:${port} `);
     });
@@ -51,4 +60,3 @@ connection();
     console.log(">>> error connect to Database  : ", error);
   }
 })();
-

@@ -1,4 +1,5 @@
 const Customer = require("../models/customer");
+const aqp = require("api-query-params");
 const createCustomerService = async (customerData) => {
   try {
     let result = await Customer.create({
@@ -24,22 +25,19 @@ const createArrayCustomerService = async (arr) => {
     return null;
   }
 };
-const getAllCustomersService = async (limit, page, name) => {
+const getAllCustomersService = async (limit, page, name, queryString) => {
   try {
     let results = null;
     if (limit && page) {
       let offset = (page - 1) * limit;
-      if (name) {
-        results = await Customer.find({
-          name: { $regex: ".*" + name + ".*" },
-          // name: { $regex: new RegExp(name, "i") },
-        })
-          .skip(offset)
-          .limit(limit)
-          .exec();
-      } else {
-        results = await Customer.find({}).skip(offset).limit(limit).exec(); // exec để đảm bảo rằng nó sẽ trả về một promise
-      }
+      const { filter } = aqp(queryString);
+      delete filter.page; // xóa page trong postman mình truyền lên để không bị lỗi vì thực tế chỉ cần có limit và skip
+      // const { filter, skip, limit, sort, projection, population } = aqp(req.query);
+      //lấy trưc tiếp từ thư viện api-query-params cũng được không cần limmit page gì hết
+
+      console.log("check filter: ", filter);
+
+      results = await Customer.find(filter).skip(offset).limit(limit).exec();
     } else {
       results = await Customer.find({});
     }

@@ -5,7 +5,7 @@ const configViewEngine = require("./config/viewEngine");
 const wedRoutes = require("./routes/web");
 const apiRoutes = require("./routes/api");
 const app = express(); // Tạo một ứng dụng Express mới
-const port = process.env.DB_PORT || 8888;
+const port = process.env.PORT || 8888;
 const hostname = process.env.HOSTNAME || "localhost";
 const connection = require("./config/database");
 const { MongoClient } = require("mongodb");
@@ -30,7 +30,7 @@ connection();
 (async () => {
   try {
     // using mongoose
-    // await connection();
+    await connection();
 
     // using mongodb driver
     // connection URL
@@ -45,13 +45,21 @@ connection();
     const db = client.db(dbName);
     const collection = db.collection("customers");
 
-    collection.insertOne({
-      name: "hiếu võ",
-      address: "gia lai",
-    });
+    // emmbeded document
+    // collection.insertOne({
+    //   name: "hiếu võ",
+    //   address: {
+    //     city: "gia lai",
+    //     district: "đak đoa",
+    //     trinh_do: {
+    //       hoc_van: "đại học",
+    //       chuyen_nganh: "công nghệ thông tin",
+    //     },
+    //   },
+    // });
 
-    let a = await collection.findOne({ address: "gia lai" });
-    console.log("find oke ", a);
+    // let a = await collection.findOne({ address: "gia lai" });
+    // console.log("find oke ", a);
 
     app.listen(port, hostname, () => {
       console.log(`Backend zero app listening at http://localhost:${port} `);

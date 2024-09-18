@@ -15,14 +15,14 @@ const customerSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    statics: {
-      findByHieuVo(name) {
-        return this.find({ name: new RegExp(name, "i") });
-      },
-      findByHoiDanIt(name) {
-        return this.find({ name: new RegExp(name, "i") });
-      },
-    },
+    // statics: {
+    //   findByHieuVo(name) {
+    //     return this.find({ name: new RegExp(name, "i") });
+    //   },
+    //   findByHoiDanIt(name) {
+    //     return this.find({ name: new RegExp(name, "i") });
+    //   },
+    // },
   }
 );
 customerSchema.plugin(mongoose_delete, { overrideMethods: "all" }); // soft delete

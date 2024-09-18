@@ -57,10 +57,27 @@ connection();
     //     },
     //   },
     // });
+        //  {
+        //   id:1,
+        //   city: "gia lai",
+        //   district: "đak đoa",
+        //   trinh_do: {
+        //     hoc_van: "đại học",
+        //     chuyen_nganh: "công nghệ thông tin",
+        //   },
+        //    {
+        //     id:2,
+        //     city: "gia lai",
+        //     district: "đak đoa",
+        //     trinh_do: {
+        //       hoc_van: "đại học",
+        //       chuyen_nganh: "công nghệ thông tin",
+        //     }
 
-    // let a = await collection.findOne({ address: "gia lai" });
-    // console.log("find oke ", a);
-
+  collection.insertOne({
+      name: "hiếu võ",
+      address:[1,2]
+    });
     app.listen(port, hostname, () => {
       console.log(`Backend zero app listening at http://localhost:${port} `);
     });

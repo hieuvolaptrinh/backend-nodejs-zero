@@ -6,7 +6,7 @@ const {
   deleteUserById,
 } = require("../services/CRUDService");
 const { get } = require("../routes/web");
-const User = require("../models/User");
+const { User } = require("../models/User");
 
 const getHomePage = async (req, res) => {
   // let [results, fields] = await connection.query("SELECT * FROM Users"); // đưa nó qua CRUDService
@@ -77,7 +77,7 @@ const postHandleRemoveUser = async (req, res) => {
   let id = req.body.userId;
   // await deleteUserById(id);
   // thử hứng kết quả trươc khi xóa
-  let result =await User.deleteOne({ _id: id });
+  let result = await User.deleteOne({ _id: id });
   console.log(">>>>>>>>>>result: ", result);
   res.redirect("/");
 };

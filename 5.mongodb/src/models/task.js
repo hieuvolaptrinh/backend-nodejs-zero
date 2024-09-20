@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const mongoose_delete = require("mongoose-delete");
-const userSchema = require("./user");
-const projectSchema = require("./project");
+const userSchema = require("./User");
+const projectSchema = require("./Project");
 // const userSchema = new mongoose.Schema({
 //   name: String,
 //   email: String,

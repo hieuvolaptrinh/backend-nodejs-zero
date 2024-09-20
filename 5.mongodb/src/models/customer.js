@@ -30,4 +30,5 @@ customerSchema.plugin(mongoose_delete, { overrideMethods: "all" }); // soft dele
 const Customer = mongoose.model("Customer", customerSchema);
 // const silence = new Kitten({ name: "hoi dan it cat" });
 // silence.save();
-module.exports = Customer;
+module.exports = { Customer, customerSchema };
+// module.exports = customerSchema; // Xuất schema, không xuất model

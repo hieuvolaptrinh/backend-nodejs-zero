@@ -14,17 +14,27 @@ const postCreateProjectService = async (data) => {
         tasks: data.tasks,
       });
       return result;
-    }
-    if (data.type == "ADD-USER") {
+    } else if (data.type == "ADD-USER") {
       console.log("check data", data);
       let myProject = await Project.findById(data.projectId).exec();
-      for (let i = 0; i < myProject.usersInfor.length; i++) {
+
+      for (let i = 0; i < data.userArray.length; i++) {
         myProject.usersInfor.push(data.userArray[i]);
       }
       let newResult = await myProject.save();
       // find project  by id : phải thêm 1 user vào dự án mình đã tạo rồi mới được
       console.log("check my project", myProject);
       return newResult;
+    } else if (data.type == "REMOVE-USERS") {
+      // mình không thể data.
+      let myProject = await Project.findById(data.projectId).exec();
+
+      let userArr = data.userArr;
+      for (let i = 0; i < userArr.length; i++) {
+        myProject.usersInfor.pull(userArr[i]);
+      }
+      let result = await myProject.save(); // phải lưu nó mới cập nhật database của chúng ta
+      return result;
     }
   } catch (error) {
     console.log("đang bị lỗi ............");
@@ -53,4 +63,36 @@ const getProjectService = (queryString) => {
     .limit(limit)
     .exec();
 };
-module.exports = { postCreateProjectService, getProjectService };
+const deleteAProjectService = async (id) => {
+  try {
+    // let result = await Project.delete({ _id: id });
+    let result = await Project.deleteById(id); // Phương thức này thực hiện soft delete chính xác
+
+    return result;
+  } catch (error) {
+    console.log("check error: ", error);
+    return null;
+  }
+};
+const putUpdateProjectsService = async (data) => {
+  try {
+    // return await Project.updateOne({_id:data.id},{data.name, data.startDate, data.endDate, data.description}); // như thế này thì ko được
+    return await Project.updateOne(
+      { _id: data.id },
+      {
+        name: data.name,
+        startDate: data.startDate,
+        endDate: data.endDate,
+        description: data.description,
+      }
+    );
+  } catch (error) {
+    console.log("check error ", error);
+  }
+};
+module.exports = {
+  postCreateProjectService,
+  getProjectService,
+  deleteAProjectService,
+  putUpdateProjectsService,
+};

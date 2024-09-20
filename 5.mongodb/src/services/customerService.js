@@ -1,5 +1,6 @@
-const Customer = require("../models/customer");
+const {Customer} = require("../models/customer");
 const aqp = require("api-query-params");
+const mongoose_delete = require("mongoose-delete");
 const createCustomerService = async (customerData) => {
   try {
     let result = await Customer.create({

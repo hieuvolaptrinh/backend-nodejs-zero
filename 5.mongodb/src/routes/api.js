@@ -16,10 +16,14 @@ const {
   getAllCustomers,
   putUpdateCustomers,
   deleteACustomer,
-  deleteArrayCustomer
+  deleteArrayCustomer,
 } = require("../controllers/customerController");
 
-const {postCreateProject,getAllProjects} = require("../controllers/projectController")
+const {
+  postCreateProject,
+  getAllProjects,
+  deleteAProject,putUpdateProjects
+} = require("../controllers/projectController");
 routerAPI.get("/users", getUsersAPI); // lấy dât
 routerAPI.post("/users", postCreateUserAPI); // tạo mới
 routerAPI.put("/users", putCreateUserAPI); // cập nhật
@@ -32,7 +36,7 @@ routerAPI.post("/customers-many", postCreateArrayCustomer);
 routerAPI.get("/customers", getAllCustomers);
 routerAPI.put("/customers", putUpdateCustomers);
 routerAPI.delete("/customers", deleteACustomer);
-routerAPI.delete("/customers-many",deleteArrayCustomer)
+routerAPI.delete("/customers-many", deleteArrayCustomer);
 
 routerAPI.get("/infor", (req, res) => {
   console.log("check query", req.query);
@@ -47,7 +51,9 @@ routerAPI.get("/infor/:name/:address", (req, res) => {
     data: req.params,
   });
 });
-// project 
-routerAPI.post("/projects",postCreateProject);
-routerAPI.get("/projects",getAllProjects);
+// project
+routerAPI.post("/projects", postCreateProject);
+routerAPI.get("/projects", getAllProjects);
+routerAPI.delete("/projects", deleteAProject);
+routerAPI.put("/projects",putUpdateProjects)
 module.exports = routerAPI; // export ra ngoài để sử dụng

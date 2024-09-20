@@ -19,7 +19,7 @@ const {
   deleteArrayCustomer
 } = require("../controllers/customerController");
 
-const {postCreateProject} = require("../controllers/projectController")
+const {postCreateProject,getAllProjects} = require("../controllers/projectController")
 routerAPI.get("/users", getUsersAPI); // lấy dât
 routerAPI.post("/users", postCreateUserAPI); // tạo mới
 routerAPI.put("/users", putCreateUserAPI); // cập nhật
@@ -49,5 +49,5 @@ routerAPI.get("/infor/:name/:address", (req, res) => {
 });
 // project 
 routerAPI.post("/projects",postCreateProject);
-
+routerAPI.get("/projects",getAllProjects);
 module.exports = routerAPI; // export ra ngoài để sử dụng

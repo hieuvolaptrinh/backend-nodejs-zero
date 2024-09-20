@@ -45,35 +45,6 @@ connection();
     const db = client.db(dbName);
     const collection = db.collection("customers");
 
-    // emmbeded document
-    // collection.insertOne({
-    //   name: "hiếu võ",
-    //   address: {
-    //     city: "gia lai",
-    //     district: "đak đoa",
-    //     trinh_do: {
-    //       hoc_van: "đại học",
-    //       chuyen_nganh: "công nghệ thông tin",
-    //     },
-    //   },
-    // });
-        //  {
-        //   id:1,
-        //   city: "gia lai",
-        //   district: "đak đoa",
-        //   trinh_do: {
-        //     hoc_van: "đại học",
-        //     chuyen_nganh: "công nghệ thông tin",
-        //   },
-        //    {
-        //     id:2,
-        //     city: "gia lai",
-        //     district: "đak đoa",
-        //     trinh_do: {
-        //       hoc_van: "đại học",
-        //       chuyen_nganh: "công nghệ thông tin",
-        //     }
-
   collection.insertOne({
       name: "hiếu võ",
       address:[1,2]

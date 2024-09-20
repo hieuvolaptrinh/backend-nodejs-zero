@@ -1,10 +1,7 @@
 const Project = require("../models/Project");
-const { postCreateProjectService } = require("../services/projectService.js");
+const { postCreateProjectService,getProjectService } = require("../services/projectService.js");
 const postCreateProject = async (req, res) => {
-
-  let result = await postCreateProjectService(
-    req.body
-  );
+  let result = await postCreateProjectService(req.body);
   if (result) {
     return res.status(200).json({
       errorCode: 0,
@@ -17,4 +14,12 @@ const postCreateProject = async (req, res) => {
     });
   }
 };
-module.exports = { postCreateProject };
+const getAllProjects = async (req, res) => {
+
+  let result = await getProjectService(req.query);
+  return res.status(200).json({
+    errorCode: 0,
+    data: result,
+  });
+};
+module.exports = { postCreateProject, getAllProjects };

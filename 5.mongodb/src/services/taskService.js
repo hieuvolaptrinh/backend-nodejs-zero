@@ -29,7 +29,7 @@ const putUpdateTasksService = async (data) => {
     { _id: data.id },
     {
       ...data,
-    }
+    } // js destructuring object
   );
   return result;
 };

@@ -36,6 +36,20 @@ const postCreateProjectService = async (data) => {
       let result = await myProject.save(); // phải lưu nó mới cập nhật database của chúng ta
       return result;
     }
+
+    // thêm task vào trong cái proejct
+    else if (data.type == "ADD-TASKS") {
+      console.log("check data", data);
+
+      let myProject = await Project.findById(data.projectId).exec();
+      console.log("check my project", myProject);
+      for (let i = 0; i < data.taskArr.length; i++) {
+        myProject.tasks.push(data.taskArr[i]);
+      }
+      let result = await myProject.save();
+
+      return result;
+    }
   } catch (error) {
     console.log("đang bị lỗi ............");
     console.log("check error: ", error);

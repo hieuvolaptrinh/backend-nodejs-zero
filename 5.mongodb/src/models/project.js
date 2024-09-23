@@ -28,7 +28,7 @@ projectSchema.plugin(mongoose_delete, { overrideMethods: "all" });
 
 const Project = mongoose.model("Project", projectSchema);
 
-module.exports = Project;
+module.exports = {Project,projectSchema};
 // const customerSchema = new mongoose.Schema(
 //     {
 //         name: String,

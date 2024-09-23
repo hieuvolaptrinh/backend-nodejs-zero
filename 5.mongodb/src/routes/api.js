@@ -22,8 +22,15 @@ const {
 const {
   postCreateProject,
   getAllProjects,
-  deleteAProject,putUpdateProjects
+  deleteAProject,
+  putUpdateProjects,
 } = require("../controllers/projectController");
+const {
+  getTasks,
+  postCreateTasks,
+  putUpdateTasks,
+  deleteTasks,
+} = require("../controllers/taskController");
 routerAPI.get("/users", getUsersAPI); // lấy dât
 routerAPI.post("/users", postCreateUserAPI); // tạo mới
 routerAPI.put("/users", putCreateUserAPI); // cập nhật
@@ -55,5 +62,11 @@ routerAPI.get("/infor/:name/:address", (req, res) => {
 routerAPI.post("/projects", postCreateProject);
 routerAPI.get("/projects", getAllProjects);
 routerAPI.delete("/projects", deleteAProject);
-routerAPI.put("/projects",putUpdateProjects)
+routerAPI.put("/projects", putUpdateProjects);
+
+// task
+routerAPI.get("/tasks", getTasks);
+routerAPI.post("/tasks", postCreateTasks);
+routerAPI.put("/tasks", putUpdateTasks);
+routerAPI.delete("/tasks", deleteTasks);
 module.exports = routerAPI; // export ra ngoài để sử dụng

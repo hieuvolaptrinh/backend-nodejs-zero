@@ -58,7 +58,7 @@ const getProjectService = (queryString) => {
   // fields: Các trường được lựa chọn để trả về từ dữ liệu.
   let offset = (page - 1) * limit;
   return Project.find(filter)
-    .populate(population)
+    .populate(population) // để lấy thông tin của user kiểu như 1 nhiều với project thì mình lấy nó là cái mảng ở trong á
     .skip(offset)
     .limit(limit)
     .exec();

@@ -1,4 +1,4 @@
-const Project = require("../models/Project");
+const { Project } = require("../models/Project");
 const aqp = require("api-query-params");
 const postCreateProjectService = async (data) => {
   try {

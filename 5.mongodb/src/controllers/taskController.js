@@ -14,6 +14,8 @@ const getTasks = async (req, res) => {
 };
 const postCreateTasks = async (req, res) => {
   let result = await postCreateTasksService(req.body);
+  console.log("check result", result);
+
   return res.status(200).json({
     errorCode: 0,
     data: result,

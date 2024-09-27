@@ -73,6 +73,7 @@ const getProjectService = (queryString) => {
   let offset = (page - 1) * limit;
   return Project.find(filter)
     .populate(population) // để lấy thông tin của user kiểu như 1 nhiều với project thì mình lấy nó là cái mảng ở trong á
+    // nếu không có thì nó sẽ trả về id của user đó
     .skip(offset)
     .limit(limit)
     .exec();

@@ -15,6 +15,7 @@
     "nodejs",
     "react"
   ],
+
   "author": "hieuvo",
   "license": "ISC",
   "dependencies": {
@@ -23,6 +24,7 @@
     "ejs": "3.1.10",
     "express": "4.18.2",
     "express-fileupload": "1.4.0",
+    "full-backend-zero": "file:",
     "i": "0.3.7",
     "mongodb": "^6.9.0",
     "mongoose": "^8.6.1",

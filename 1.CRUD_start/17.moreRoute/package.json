@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "4.18.2",
+    "full-backend-zero": "file:",
     "i": "0.3.7"
   }
 }

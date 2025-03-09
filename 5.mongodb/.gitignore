@@ -1,3 +1,0 @@
-node_modules
-.env 
-# để bỏ qua file .env khỏi github
